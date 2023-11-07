@@ -12,8 +12,11 @@ int main()
     int diceCpu1;
     int dicePlayer2;
     int diceCpu2;
+    int winsPlayer = 0;
+    int winsCpu = 0;
     int money;
     int age;
+    string yesNo;
 
     srand(time(0));
 
@@ -40,23 +43,55 @@ int main()
     
     cout << "$" << money << endl;
     
+    while (true)
+    {
+        dicePlayer1 = rand() % 6 + 1;
+        dicePlayer2 = rand() % 6 + 1;
 
-    dicePlayer1 = rand() % 6 + 1;
-    dicePlayer2 = rand() % 6 + 1;
+        diceCpu1 = rand() % 6 + 1;
+        diceCpu2 = rand() % 6 + 1;
+        cout << "You got " << dicePlayer1 + dicePlayer2 << endl;
+        cout << "Computer got " << diceCpu1 + dicePlayer2 << endl;
+
+        if (dicePlayer1 + dicePlayer2 > diceCpu1 + diceCpu2)
+        {
+            winsPlayer = winsPlayer++;
+            cout << "You won a round! You have " << winsPlayer << " wins." << endl;
+            if (winsPlayer == 2)
+            {
+                cout << "You won it all! Your betted money has been doubled." << endl;
+                cout << "Do you want to play again? y/n" << endl;
+                cin >> yesNo;
+                if (yesNo == "y")
+                {
+                    continue;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            continue;
+        }
+        else
+        {
+            winsCpu = winsCpu++;
+            cout << "You lost a round. Computer has " << winsCpu << " wins." << endl;
+            if (winsCpu == 2)
+            {
+                cout << "You lost it all. Your betted money has been removed." << endl;
+                cout << "Do you want to play again? y/n" << endl;
+                cin >> yesNo;
+                while (true)
+                {
+
+                }
+            }
+            continue;
+        }
+    }
     
-    diceCpu1 = rand() % 6 + 1;
-    diceCpu2 = rand() % 6 + 1;
-    cout << "You got " << dicePlayer1 + dicePlayer2 << endl;
-    cout << "Computer got " << diceCpu1 + dicePlayer2 << endl;
 
-    if (dicePlayer1+dicePlayer2 > diceCpu1+diceCpu2)
-    {
-        cout << "You won!";
-    }
-    else
-    {
-        cout << "You lost.";
-    }
 }
 
 
