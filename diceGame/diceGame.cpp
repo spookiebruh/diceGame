@@ -1,8 +1,7 @@
 // diceGame.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
 
 #include <iostream>
-#include <ctime>;
+#include <ctime>
 using namespace std;
 
 
@@ -15,6 +14,7 @@ int main()
     int winsPlayer = 0;
     int winsCpu = 0;
     int money;
+    int bet;
     int age;
     string yesNo;
 
@@ -42,6 +42,20 @@ int main()
     }
     
     cout << "$" << money << endl;
+    while (true)
+    {
+        cout << "How much money do you want to bet on this first game? $100, $300 or $500?" << endl;
+        cin >> bet;
+        if (bet == 100 || bet == 300 || bet == 500)
+        {
+            break;
+        }
+        else
+        {
+           cout << "Please choose $100, $300 or $500." << endl;
+           continue; 
+        }
+    }
     
     while (true)
     {
@@ -57,16 +71,33 @@ int main()
         {
             winsPlayer = winsPlayer++;
             cout << "You won a round! You have " << winsPlayer << " wins." << endl;
+
             if (winsPlayer == 2)
             {
+                money = bet + money;
                 cout << "You won it all! Your betted money has been doubled." << endl;
+                cout << "You now have $" << money << "." << endl;
                 cout << "Do you want to play again? y/n" << endl;
                 cin >> yesNo;
-                if (yesNo == "y")
+                if (yesNo == "y" || yesNo == "Y")
                 {
+                    while (true)
+                    {
+                        cout << "How much money do you want to bet on this first game? $100, $300 or $500?" << endl;
+                        cin >> bet;
+                        if (bet == 100 || bet == 300 || bet == 500)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                        cout << "Please choose $100, $300 or $500." << endl;
+                        continue; 
+                        }
+                    }
                     continue;
                 }
-                else
+                else if (yesNo == "n" || yesNo == "N")
                 {
                     break;
                 }
@@ -78,13 +109,19 @@ int main()
             winsCpu = winsCpu++;
             cout << "You lost a round. Computer has " << winsCpu << " wins." << endl;
             if (winsCpu == 2)
-            {
+            {   
+                money = bet - money;
                 cout << "You lost it all. Your betted money has been removed." << endl;
+                cout << "You now have $" << money << "." << endl;
                 cout << "Do you want to play again? y/n" << endl;
                 cin >> yesNo;
-                while (true)
+                if (yesNo == "y" || yesNo == "Y")
                 {
-
+                    continue;
+                }
+                else if (yesNo == "n" || yesNo == "N")
+                {
+                    break;
                 }
             }
             continue;
