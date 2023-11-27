@@ -1,4 +1,3 @@
-// diceGame.cpp : This file contains the 'main' function. Program execution begins and ends there.
 
 #include <iostream>
 #include <ctime>
@@ -7,6 +6,8 @@ using namespace std;
 
 int main()
 {
+    // Initierar alla variabler.
+
     int dicePlayer1;
     int diceCpu1;
     int dicePlayer2;
@@ -20,6 +21,8 @@ int main()
 
     srand(time(0));
 
+    // Ålderskontroll som avbryter programmet om man är under 18.
+
     cout << "Welcome to Dice Game!" << endl;
     cout << "How old are you?" << endl;
     cin >> age;
@@ -28,6 +31,8 @@ int main()
         cout << "You need to be over 18 to play this game. >:(";
         return 0;
     }
+
+    // Insättning av pengar som inte får överskrida $5000.
 
     while (true)
     {
@@ -41,6 +46,8 @@ int main()
         break;
     }
     
+    // Loop för att betta pengar på den första matchen. Man kan inte välja något annat än 100, 300 eller 500.
+
     cout << "$" << money << endl;
     while (true)
     {
@@ -65,6 +72,8 @@ int main()
         }
     }
     
+    // Huvudloopen för utförandet av spelet
+
     while (true)
     {
         dicePlayer1 = rand() % 6 + 1;
@@ -72,9 +81,14 @@ int main()
 
         diceCpu1 = rand() % 6 + 1;
         diceCpu2 = rand() % 6 + 1;
+
+        // Här under visar jag vad spelaren och datorn fick för resultat på en runda.
+
         cout << "You got " << dicePlayer1 + dicePlayer2 << endl;
         cout << "Computer got " << diceCpu1 + dicePlayer2 << endl;
 
+        /* Om spelarens resultat är högre än datorn så vinner man en runda.Då kollar den även om man vunnit en tidigare.Då dubblas ens bettade pengar och
+            man blir frågad om man vill spela igen. Då går den igenom att betta pengar igen. */
         if (dicePlayer1 + dicePlayer2 > diceCpu1 + diceCpu2)
         {
             winsPlayer = winsPlayer++;
@@ -83,6 +97,8 @@ int main()
             if (winsPlayer == 2)
             {
                 money = money + bet;
+                winsPlayer = 0;
+                winsCpu = 0;
                 cout << "You won it all! Your betted money has been doubled." << endl;
                 cout << "You now have $" << money << "." << endl;
                 cout << "Do you want to play again? y/n" << endl;
@@ -120,6 +136,9 @@ int main()
             }
             continue;
         }
+
+        // Här gör koden exakt samma som över fast om man förlorar mot datorn. 
+
         else
         {
             winsCpu = winsCpu++;
@@ -127,6 +146,8 @@ int main()
             if (winsCpu == 2)
             {   
                 money = money - bet;
+                winsPlayer = 0;
+                winsCpu = 0;
                 cout << "You lost it all. Your betted money has been removed." << endl;
                 cout << "You now have $" << money << "." << endl;
                 cout << "Do you want to play again? y/n" << endl;
