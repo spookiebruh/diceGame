@@ -48,12 +48,20 @@ int main()
         cin >> bet;
         if (bet == 100 || bet == 300 || bet == 500)
         {
-            break;
+            if (bet > money)
+            {
+                cout << "Please choose a number you can afford." << endl;
+                continue; 
+            }
+            else
+            {
+                break;
+            } 
         }
         else
         {
-           cout << "Please choose $100, $300 or $500." << endl;
-           continue; 
+            cout << "Please choose $100, $300 or $500." << endl;
+            continue;
         }
     }
     
@@ -74,7 +82,7 @@ int main()
 
             if (winsPlayer == 2)
             {
-                money = bet + money;
+                money = money + bet;
                 cout << "You won it all! Your betted money has been doubled." << endl;
                 cout << "You now have $" << money << "." << endl;
                 cout << "Do you want to play again? y/n" << endl;
@@ -83,11 +91,19 @@ int main()
                 {
                     while (true)
                     {
-                        cout << "How much money do you want to bet on this first game? $100, $300 or $500?" << endl;
+                        cout << "How much money do you want to bet on this game? $100, $300 or $500?" << endl;
                         cin >> bet;
                         if (bet == 100 || bet == 300 || bet == 500)
                         {
-                            break;
+                            if (bet > money)
+                            {
+                                cout << "Please choose a number you can afford." << endl;
+                                continue; 
+                            }
+                            else
+                            {
+                                break;
+                            }
                         }
                         else
                         {
@@ -110,13 +126,35 @@ int main()
             cout << "You lost a round. Computer has " << winsCpu << " wins." << endl;
             if (winsCpu == 2)
             {   
-                money = bet - money;
+                money = money - bet;
                 cout << "You lost it all. Your betted money has been removed." << endl;
                 cout << "You now have $" << money << "." << endl;
                 cout << "Do you want to play again? y/n" << endl;
                 cin >> yesNo;
                 if (yesNo == "y" || yesNo == "Y")
                 {
+                    while (true)
+                    {
+                        cout << "How much money do you want to bet on this game? $100, $300 or $500?" << endl;
+                        cin >> bet;
+                        if (bet == 100 || bet == 300 || bet == 500)
+                        {
+                            if (bet > money)
+                            {
+                                cout << "Please choose a number you can afford." << endl;
+                                continue; 
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        else
+                        {
+                        cout << "Please choose $100, $300 or $500." << endl;
+                        continue; 
+                        }
+                    }
                     continue;
                 }
                 else if (yesNo == "n" || yesNo == "N")
